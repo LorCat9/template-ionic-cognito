@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <img src="./assets/imgs/logo_anthea.png" align="middle"/>
+
+  <ion-item>
+    <ion-label floating>Email</ion-label>
+    <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="!needCode">
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="needNewPassword">
+    <ion-label floating>Nuova Password</ion-label>
+    <ion-input type="password" [(ngModel)]="user.newpassword"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="needCode">
+    <ion-label floating>Codice Conferma</ion-label>
+    <ion-input type="text" [(ngModel)]="codiceConferma"></ion-input>
+  </ion-item>
+
+  <div *ngIf="errorMessage" margin-top padding style="color: #D8000C; background-color: #FFBABA;">
+    <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
+    {{ errorMessage }}
+  </div>
+
+  <button ion-button margin-top color="primary" block large (click)="signMeIn()">Accedi</button>
+
+  <div text-center padding-top>
+    Non possiedi un account? <a (click)="goToRegister()" style="cursor: pointer" >Registrati</a>
+  </div>
+
+  <div text-center padding-top>
+    Hai perso il codice di registrazione? <a (click)="goToResendCode()" style="cursor: pointer">Reinvialo</a>
+  </div>
+
+  <div text-center padding-top>
+    Hai dimenticato la password? <a (click)="goToForgotPasswrod()" style="cursor: pointer">Recuperala</a>
+  </div>
+
+</ion-content>

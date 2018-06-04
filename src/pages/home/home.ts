@@ -1,14 +1,27 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {UserService} from '../../providers/authentication/userService.service';
+import {LoggedInCallback} from '../../providers/AWS/cognito.service';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit, LoggedInCallback{
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+              private userService: UserService) {
 
+  }
+
+  ngOnInit() {
+    this.userService.isAuthenticated(this); //PASSO LA CLASSE HOME CHE CONTIENTE LA CALLBACK DA RICHIAMARE !!!!
+  }
+
+  isLoggedInCallback(message: string, isLoggedIn: boolean, username: string) {
+    if (!isLoggedIn) {
+      this.navCtrl.setRoot('LoginPage');
+    }
   }
 
 }

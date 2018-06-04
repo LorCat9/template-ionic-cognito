@@ -1,0 +1,67 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Registrazione</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Cognome</ion-label>
+      <ion-input type="text" [(ngModel)]="user.family_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Licenza Aziendale</ion-label>
+      <ion-input type="text" [(ngModel)]="user.apikey"></ion-input>
+    </ion-item>
+
+    <div *ngIf="errorApikey" margin-top padding style="color: #D8000C; background-color: #FFBABA;">
+      <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
+      {{ errorApikey }}
+    </div>
+
+    <ion-item>
+      <ion-label floating>Nuova Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+
+    <div *ngIf="(user.password.length < 8) && (user.password !== '') " margin-top padding style="color: #D8000C; background-color: #FFBABA;">
+      <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
+      Password inferiore agli 8 caratteri!
+    </div>
+
+    <ion-item>
+      <ion-label floating>Conferma Password</ion-label>
+      <ion-input type="password" [(ngModel)]="confirmedPassword"></ion-input>
+    </ion-item>
+
+    <div *ngIf="(user.password !== confirmedPassword) && (confirmedPassword !== '') " margin-top padding style="color: #D8000C; background-color: #FFBABA;">
+      <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
+      Password Diversa!
+    </div>
+
+    <div *ngIf="errorMessage" margin-top padding style="color: #D8000C; background-color: #FFBABA;">
+      <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
+      {{ errorMessage }}
+    </div>
+  </ion-list>
+
+  <button block large ion-button color="primary" block (click)="checkAll()">Registrati</button>
+
+</ion-content>
