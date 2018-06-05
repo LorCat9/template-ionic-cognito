@@ -22,6 +22,10 @@ End with an example of getting some data out of the system or using it for a lit
 
 * **Lorenzo Catalli** - *Initial work* - [LorCat](https://github.com/LorCat9)
 
+## Company
+
+* **Anthea** - [website](http://www.gruppoanthea.it)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
