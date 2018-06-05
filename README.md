@@ -15,8 +15,6 @@ Per far partire in locale l'applicazione
 ```
 ionic serve
 ```
-End with an example of getting some data out of the system or using it for a little demo
-
 
 ## Authors
 
