@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, Loading, LoadingController} from 'ionic-angular';
+import {IonicPage, NavController, Loading, LoadingController} from 'ionic-angular';
 
 // Providers
 import { UserService } from './../../../providers/authentication/userService.service';
-import {LoginUser} from '../../../providers/AWS/cognito.service';
+import {AuthenticateCallback, ConfirmUserCallback, LoginUser} from '../../../providers/AWS/cognito.service';
+import {
+  _ERROR_INSERIMENTO_DATI_LOGIN,
+  _MESSAGE_LOADER
+} from '../../../CONFIG/CONFIG';
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage implements AuthenticateCallback, ConfirmUserCallback {
 
   user = {} as LoginUser;
   codiceConferma: string;
@@ -48,7 +52,7 @@ export class LoginPage {
   signMeIn() {
     this.errorMessage = null;
     if (this.user.email == null || this.user.password == null) {
-      this.errorMessage = "Devono essere completati tutti i campi";
+      this.errorMessage = _ERROR_INSERIMENTO_DATI_LOGIN;
       return;
     }
     this.presentLoading();
@@ -74,32 +78,25 @@ export class LoginPage {
         this.errorMessage = message;
       }
 
-    } else { //success HERE set AWS creds to establishing a user session with the Amazon Cognito Identity service.
+    } else {      // success HERE set AWS creds to establishing a user session with the Amazon Cognito Identity service.
       this.userService.setAWSConfig(result);
+      this.navCtrl.setRoot('HomePage');   // Rimando sulla HomePage
     }
   }
 
   confirmUserCallback(message: string, result: any) {
     this.dismissLoader();
-    if (message != null) { //error
+    if (message) {      // error
       this.errorMessage = message;
     }
-    else { //success
-      console.log("CONFIRM IN COMPLETED!");
+    else {              // success
       this.userService.authenticate(this.user.email, this.user.password, this);
-    }
-  }
-
-  isLoggedInCallback(message: string, isLoggedIn: boolean) {
-    console.log("The user is logged in: " + isLoggedIn);
-    if (isLoggedIn) {
-
     }
   }
 
   private presentLoading() {
     this.loader = this.loadingCtrl.create({
-      content: "Please wait...",
+      content: _MESSAGE_LOADER,
     });
     this.loader.present();
   }

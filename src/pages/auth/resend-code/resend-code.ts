@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import {IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
 import {UserService} from '../../../providers/authentication/userService.service';
+import {CognitoCallback} from '../../../providers/AWS/cognito.service';
 
 @IonicPage()
 @Component({
   selector: 'page-resend-code',
   templateUrl: 'resend-code.html',
 })
-export class ResendCodePage {
+export class ResendCodePage implements CognitoCallback{
 
   email: string;
   errorMessage: string;
   private loader: Loading;
 
   constructor(private userService: UserService,
-    public navCtrl: NavController, public navParams: NavParams,
+              public navCtrl: NavController,
               private loadingCtrl: LoadingController) {
   }
 

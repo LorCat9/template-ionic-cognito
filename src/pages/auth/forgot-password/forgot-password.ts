@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
 
-import { LoginUser } from '../../../models/user/loginUser';
 import {UserService} from '../../../providers/authentication/userService.service';
+import {CognitoCallback, LoginUser} from '../../../providers/AWS/cognito.service';
 
 @IonicPage()
 @Component({
   selector: 'page-forgot-password',
   templateUrl: 'forgot-password.html',
 })
-export class ForgotPasswordPage implements OnInit{
+export class ForgotPasswordPage implements OnInit, CognitoCallback{
 
   user = {} as LoginUser;
   codice: string;

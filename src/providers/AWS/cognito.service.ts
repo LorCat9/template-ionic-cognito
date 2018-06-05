@@ -123,9 +123,6 @@ export class CognitoService {
     //POTENTIAL: Region needs to be set if not already set previously elsewhere.
     AWS.config.region = _REGION;
 
-    let path = 'cognito-idp.';
-    path = path + _REGION + '.amazonaws.com/' + _USER_POOL_ID;
-
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         IdentityPoolId: _IDENTITY_POOL_ID,
         Logins: {
@@ -147,7 +144,6 @@ export class CognitoService {
           callback(session);
         }
         else {    // session not valid
-          console.log("Sessione Scaduta");
           user.refreshSession(session.refreshToken,
             (err, session) => {
               if (err)

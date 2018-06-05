@@ -1,15 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertController, IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
 
-import { RegistrationUser } from './../../../providers/AWS/cognito.service';
+import {
+  AuthenticateCallback, CognitoCallback, ConfirmUserCallback,
+  RegistrationUser
+} from './../../../providers/AWS/cognito.service';
 import {UserService} from '../../../providers/authentication/userService.service';
+import {
+  _ALERT_CC_SUBTITLE, _ALERT_CC_TITLE, _ALERT_ERROR_CAMPI_SUBTITLE, _ALERT_ERROR_CAMPI_TITLE, _ERROR_LICENZA_NON_VALIDA,
+  _MESSAGE_LOADER, _MIN_PSW_LENGTH
+} from '../../../CONFIG/CONFIG';
 
 @IonicPage()
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html',
 })
-export class RegisterPage implements OnInit{
+export class RegisterPage implements OnInit, AuthenticateCallback, CognitoCallback, ConfirmUserCallback{
 
   user = {} as RegistrationUser;
   confirmedPassword;
@@ -41,17 +48,14 @@ export class RegisterPage implements OnInit{
   cognitoCallback(message: string, result: any) {
     if (message != null) { //error
       this.dismissLoader();
-      if(message === "PreSignUp failed with error Apikey non valida!.") {
-        this.errorApikey = "Licenza non valida";
+      if(message === "PreSignUp failed with error Apikey non valida!.") {   // È il messaggio che mi arriva dalla Lambda
+        this.errorApikey = _ERROR_LICENZA_NON_VALIDA;
       }
       else{
         this.errorMessage = message;
       }
-      console.log("result: " + message);
     } else { //success
-      console.log("REGISTRAZIONE COMPLETATA");
       this.userService.authenticate(this.user.email, this.user.password, this);
-      //this.navCtrl.pop();
     }
   }
 
@@ -80,7 +84,6 @@ export class RegisterPage implements OnInit{
       this.dismissLoader();
     }
     else { //success
-      console.log("CONFIRM IN COMPLETED!");
       this.userService.authenticate(this.user.email, this.user.password, this);
     }
   }
@@ -88,8 +91,8 @@ export class RegisterPage implements OnInit{
   // dopo essersi registrato lo faccio direttamente loggare da questa pagina
   private presentPrompt() {
     let alert = this.alertCtrl.create({
-      title: 'Codice Conferma',
-      subTitle:'Inserisci il codice di conferma che è stato inviato a '+this.user.email+' (controlla anche nello spam/promozioni): ',
+      title: _ALERT_CC_TITLE,
+      subTitle:_ALERT_CC_SUBTITLE,
       inputs: [
         {
           name: 'codice',
@@ -116,10 +119,11 @@ export class RegisterPage implements OnInit{
     alert.present();
   }
 
+  // alert errore compilazione
   private callAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Ricontrolla i campi',
-      subTitle: 'Campo vuoto o ricontrolla la nuova password',
+      title: _ALERT_ERROR_CAMPI_TITLE,
+      subTitle: _ALERT_ERROR_CAMPI_SUBTITLE,
       buttons: ['Chiudi']
     });
     alert.present();
@@ -129,18 +133,17 @@ export class RegisterPage implements OnInit{
     if(this.user.password === "" || this.user.email === "" || this.user.family_name === ""|| this.user.name === "") {
       this.callAlert();
     }
-    else if((this.confirmedPassword !== this.user.password) || (this.user.password.length < 8)){
+    else if((this.confirmedPassword !== this.user.password) || (this.user.password.length < _MIN_PSW_LENGTH)){
       this.callAlert();
     }
     else {
       this.register();
-      //console.log("Register");
     }
   }
 
   private presentLoading() {
     this.loader = this.loadingCtrl.create({
-      content: "Please wait...",
+      content: _MESSAGE_LOADER,
     });
     this.loader.present();
   }
