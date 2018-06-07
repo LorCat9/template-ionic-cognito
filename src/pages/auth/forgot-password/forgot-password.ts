@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
 
 import {UserService} from '../../../providers/authentication/userService.service';
 import {CognitoCallback, LoginUser} from '../../../providers/AWS/cognito.service';

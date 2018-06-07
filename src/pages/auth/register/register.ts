@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
 
 import {
   AuthenticateCallback, CognitoCallback, ConfirmUserCallback,
