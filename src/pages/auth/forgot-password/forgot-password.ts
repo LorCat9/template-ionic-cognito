@@ -3,6 +3,7 @@ import {IonicPage, Loading, LoadingController, NavController} from 'ionic-angula
 
 import {UserService} from '../../../providers/authentication/userService.service';
 import {CognitoCallback, LoginUser} from '../../../providers/AWS/cognito.service';
+import {_MIN_PSW_LENGTH} from '../../../CONFIG/CONFIG';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,7 @@ export class ForgotPasswordPage implements OnInit, CognitoCallback{
   needCode: boolean;
   private loader: Loading;
   errorMessage: string;
+  min_psw_length = _MIN_PSW_LENGTH;
 
   constructor(private userService: UserService,
               public navCtrl: NavController,

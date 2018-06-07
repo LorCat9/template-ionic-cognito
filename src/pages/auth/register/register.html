@@ -41,9 +41,9 @@
       <ion-input type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
 
-    <div *ngIf="(user.password.length < 8) && (user.password !== '') " margin-top padding style="color: #D8000C; background-color: #FFBABA;">
+    <div *ngIf="(user.password.length < min_psw_length) && (user.password !== '') " margin-top padding style="color: #D8000C; background-color: #FFBABA;">
       <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
-      Password inferiore agli 8 caratteri!
+      Password's lenght is less than {{min_psw_length}} c!
     </div>
 
     <ion-item>
@@ -62,6 +62,6 @@
     </div>
   </ion-list>
 
-  <button block large ion-button color="primary" block (click)="checkAll()">Registrati</button>
+  <button block large ion-button color="primary" block (click)="checkAll()">Register</button>
 
 </ion-content>

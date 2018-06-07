@@ -22,13 +22,13 @@
   </ion-item>
 
   <ion-item *ngIf="needNewPassword">
-    <ion-label floating>Nuova Password</ion-label>
+    <ion-label floating>New Password</ion-label>
     <ion-input type="password" [(ngModel)]="user.newpassword"></ion-input>
   </ion-item>
 
   <ion-item *ngIf="needCode">
-    <ion-label floating>Codice Conferma</ion-label>
-    <ion-input type="text" [(ngModel)]="codiceConferma"></ion-input>
+    <ion-label floating>Confirmation Code</ion-label>
+    <ion-input type="text" [(ngModel)]="confirmationCode"></ion-input>
   </ion-item>
 
   <div *ngIf="errorMessage" margin-top padding style="color: #D8000C; background-color: #FFBABA;">
@@ -36,18 +36,18 @@
     {{ errorMessage }}
   </div>
 
-  <button ion-button margin-top color="primary" block large (click)="signMeIn()">Accedi</button>
+  <button ion-button margin-top color="primary" block large (click)="signMeIn()">Login</button>
 
   <div text-center padding-top>
-    Non possiedi un account? <a (click)="goToRegister()" style="cursor: pointer" >Registrati</a>
+    Do not have an account? <a (click)="goToRegister()" style="cursor: pointer" >Register</a>
   </div>
 
   <div text-center padding-top>
-    Hai perso il codice di registrazione? <a (click)="goToResendCode()" style="cursor: pointer">Reinvialo</a>
+    Did you lose your confirmation code? <a (click)="goToResendCode()" style="cursor: pointer">Resend it</a>
   </div>
 
   <div text-center padding-top>
-    Hai dimenticato la password? <a (click)="goToForgotPasswrod()" style="cursor: pointer">Recuperala</a>
+    Did you forget your password? <a (click)="goToForgotPasswrod()" style="cursor: pointer">Retrieve it</a>
   </div>
 
 </ion-content>

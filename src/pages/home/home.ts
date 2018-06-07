@@ -15,7 +15,7 @@ export class HomePage implements OnInit, LoggedInCallback{
   }
 
   ngOnInit() {
-    this.userService.isAuthenticated(this); //PASSO LA CLASSE HOME CHE CONTIENTE LA CALLBACK DA RICHIAMARE !!!!
+    this.userService.isAuthenticated(this);
   }
 
   isLoggedInCallback(message: string, isLoggedIn: boolean, username: string) {

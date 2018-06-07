@@ -17,7 +17,7 @@ import {
 export class LoginPage implements AuthenticateCallback, ConfirmUserCallback {
 
   user = {} as LoginUser;
-  codiceConferma: string;
+  confirmationCode: string;
   errorMessage: string;
 
   needNewPassword = false;
@@ -57,8 +57,8 @@ export class LoginPage implements AuthenticateCallback, ConfirmUserCallback {
     }
     this.presentLoading();
     this.user.email = this.user.email.toLowerCase();
-    if (this.codiceConferma)
-      this.userService.confirmRegistration(this.user.email, this.codiceConferma, this);
+    if (this.confirmationCode)
+      this.userService.confirmRegistration(this.user.email, this.confirmationCode, this);
     else if (!this.user.newpassword)
       this.userService.authenticate(this.user.email, this.user.password, this);
     else

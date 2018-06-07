@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertController, IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
-
 import {
   AuthenticateCallback, CognitoCallback, ConfirmUserCallback,
   RegistrationUser
@@ -22,6 +21,7 @@ export class RegisterPage implements OnInit, AuthenticateCallback, CognitoCallba
   confirmedPassword;
   errorMessage;
   errorApikey;
+  min_psw_length = _MIN_PSW_LENGTH;
   private loader: Loading;
 
   constructor(private userService: UserService,
@@ -119,12 +119,12 @@ export class RegisterPage implements OnInit, AuthenticateCallback, CognitoCallba
     alert.present();
   }
 
-  // alert errore compilazione
+  // alert errore compilazione campi
   private callAlert() {
     let alert = this.alertCtrl.create({
       title: _ALERT_ERROR_CAMPI_TITLE,
       subTitle: _ALERT_ERROR_CAMPI_SUBTITLE,
-      buttons: ['Chiudi']
+      buttons: ['Close']
     });
     alert.present();
   }
