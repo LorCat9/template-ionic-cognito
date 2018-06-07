@@ -11,7 +11,7 @@ export const _POOL_DATA = {
     UserPoolId: _USER_POOL_ID,
     ClientId: _CLIENT_ID
 };
-export const _MIN_PSW_LENGTH = 8;   // da scegliere su cognito, default 8
+export const _MIN_PSW_LENGTH = 8;   // To be choosen on Cognito Console
 
 // general
 export const _MESSAGE_LOADER = "Please wait...";

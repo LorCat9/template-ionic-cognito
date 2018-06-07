@@ -127,7 +127,7 @@ export class CognitoService {
         IdentityPoolId: _IDENTITY_POOL_ID,
         Logins: {
           // Change the key below according to the specific region your user pool is in.
-          'cognito-idp.REGION.amazonaws.com/_YOUR_USER_POOL_ID': result.getIdToken().getJwtToken() // TODO: refactoring: rendere parametrico region e user_pool_id
+          'cognito-idp.REGION.amazonaws.com/_YOUR_USER_POOL_ID': result.getIdToken().getJwtToken()    // EDIT THE KEY
         }
       }
     );

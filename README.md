@@ -1,17 +1,21 @@
 # Template App Ionic (Amazon Cognito)
+Basic [IONIC](https://ionicframework.com/) template which uses [Amazon Cognito](https://aws.amazon.com/cognito/).
 
-Template di base per un'applicazione Ionic che utilizza Amazon Cognito come servizio di autenticazione
+With this template all the authentication services are already implemented. 
 
 # Getting Started
 
-Prima di iniziare si devono inserire le configurazioni riguardanti lo [User Pool](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
-di Amazon Cognito legato all'applicazione. Le informazioni si trovano nel file [CONFIG](/src/CONFIG/CONFIG.ts) 
+* Before starting you have to insert your [User Pool's config](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
+  inside the file [CONFIG](/src/CONFIG/CONFIG.ts)
 
-Per installare i vari pacchetti
+* Edit the file [cognito.service.ts](/src/providers/AWS/cognito.service.ts) on the method **setAWSConfig**
+  on the commented line 'EDIT THE KEY'.
+  
+To install the node modules type:
 ```
 npm install
 ```
-Per far partire in locale l'applicazione
+To start the application on your local browser type:
 ```
 ionic serve
 ```
