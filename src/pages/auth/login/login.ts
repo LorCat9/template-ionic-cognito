@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, Loading, LoadingController} from 'ionic-angular';
 
+import {HomePage} from '../../home/home';
 // Providers
 import { UserService } from './../../../providers/authentication/userService.service';
 import {AuthenticateCallback, ConfirmUserCallback, LoginUser} from '../../../providers/AWS/cognito.service';
@@ -66,8 +67,8 @@ export class LoginPage implements AuthenticateCallback, ConfirmUserCallback {
   }
 
   authenticateCallback(message: string, result: any) {
+    this.dismissLoader();
     if (message != null) { //error
-      this.dismissLoader();
       if (message == "New password is required.") {
         this.needNewPassword = true;
       }
@@ -80,7 +81,7 @@ export class LoginPage implements AuthenticateCallback, ConfirmUserCallback {
 
     } else {      // success HERE set AWS creds to establishing a user session with the Amazon Cognito Identity service.
       this.userService.setAWSConfig(result);
-      this.navCtrl.setRoot('HomePage');   // Rimando sulla HomePage
+      this.navCtrl.setRoot(HomePage);   // Rimando sulla HomePage
     }
   }
 
