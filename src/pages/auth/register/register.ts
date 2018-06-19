@@ -9,6 +9,7 @@ import {
   _ALERT_CC_SUBTITLE, _ALERT_CC_TITLE, _ALERT_ERROR_CAMPI_SUBTITLE, _ALERT_ERROR_CAMPI_TITLE, _ERROR_LICENZA_NON_VALIDA,
   _MESSAGE_LOADER, _MIN_PSW_LENGTH
 } from '../../../CONFIG/CONFIG';
+import {HomePage} from '../../home/home';
 
 @IonicPage()
 @Component({
@@ -75,6 +76,7 @@ export class RegisterPage implements OnInit, AuthenticateCallback, CognitoCallba
     }
     else { //success HERE set AWS creds to establishing a user session with the Amazon Cognito Identity service.
       this.userService.setAWSConfig(result);
+      this.navCtrl.setRoot(HomePage);
     }
   }
 
